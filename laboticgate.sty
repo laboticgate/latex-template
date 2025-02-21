@@ -1,0 +1,225 @@
+% version 1.4
+
+% 通常利用するパッケージ
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{ascmac}
+\usepackage{luatexja-ruby}
+
+% スタイル適用に必要なパッケージ
+\usepackage{listings}
+\usepackage{background}
+\usepackage{fancyhdr}
+\usepackage{titling}
+\usepackage{titlesec}
+\usepackage{color}
+\usepackage{makecell}
+\usepackage{tabularx}
+\usepackage[symbol]{footmisc}
+\renewcommand{\thefootnote}{*\arabic{footnote}}
+
+%% % フォント設定
+%% % 和文フォント設定
+%% \usepackage[match,deluxe,nfssonly]{luatexja-preset}
+%% \ltjnewpreset{customfont}{%
+%%   mc-l  = assets/fonts/HiraMinPron.ttc,
+%%   mc-m  = assets/fonts/HiraMinPron.ttc,
+%%   mc-bx = assets/fonts/HiraMinPron.ttc,
+%%   gt-m  = assets/fonts/HiraKakuW3.ttc,
+%%   gt-bx = assets/fonts/HiraKakuW4.ttc,
+%%   gt-eb = assets/fonts/HiraKakuW5.ttc,
+%%   mg-m  = assets/fonts/HiraMaruPronW4.ttc,
+%% }
+%% \ltjapplypreset{customfont}
+%% % 欧文フォント設定
+%% \usepackage[abspath]{currfile}
+%% \usepackage{luatexja-fontspec}
+%% \setmainfont[
+%%   Path        = \currfileabsdir,
+%%   UprightFont = assets/fonts/HiraMinPron,
+%%   AutoFakeSlant=0.3,
+%%   BoldFont    = assets/fonts/HiraMinPron,
+%% ]{mincho.ttc} % \rmfamily のフォント
+%% \setsansfont[
+%%   Path        = \currfileabsdir,
+%%   UprightFont = assets/fonts/HiraKakuW3,
+%%   AutoFakeSlant=0.3,
+%%   BoldFont    = assets/fonts/HiraKakuW4,
+%% ]{gothic.ttc} % \sffamily のフォント
+%% \setmonofont{mono.ttf}      % \ttfamily のフォント
+%% \setmonojfont{mono.ttf}      % \ttfamily のフォント
+
+% リスト表示用
+\lstset{
+  numbers=none,
+  frame=single,
+  columns=fixed,
+  basewidth=0.5em,
+  basicstyle=\ttfamily\textsf\tiny\fontsize{6pt}{6pt}\selectfont,
+  breaklines=true,
+  breakindent=10pt,
+  xleftmargin=3pt,
+  xrightmargin=3pt,
+  aboveskip=-2pt,
+  belowskip=-2pt,
+}
+
+% ページ背景画像の設定
+\backgroundsetup{
+  scale=1,
+  opacity=1,
+  angle=0,
+  color=black,
+  contents={%
+    \ifodd\value{page}
+    \includegraphics[width=\paperwidth,height=\paperheight]{assets/background/odd.pdf}
+    \else
+    \includegraphics[width=\paperwidth,height=\paperheight]{assets/background/even.pdf}
+    \fi
+  },
+}
+
+% フッタに表示するページ番号
+\newcommand{\footertitle}[1]{\def\@footertitle{#1}}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0.0pt}
+\renewcommand{\footrulewidth}{0.0pt}
+\fancyfoot[LE]{\small{\thepage\quad---\quad\@footertitle}}
+\fancyfoot[RO]{\small{\@footertitle\quad---\quad\thepage}}
+
+% タイトルと著者情報をクリア
+\title{}
+\author{}
+
+% 著者
+\renewcommand{\author}[1]{\def\@theauthor{#1}}
+\newcommand{\affiliation}[1]{\def\@affiliation{#1}}
+\newcommand{\social}[2]{\def\@social{#1}\def\@account{#2}}
+\newcommand{\email}[1]{\def\@email{#1}}
+\newcommand{\summary}[1]{\def\@summary{#1}}
+
+\author{}
+\affiliation{}
+\social{}{}
+\email{}
+\summary{}
+
+\newcommand{\authortable}{
+%  \scalebox{0.7}{
+  \small
+    \begin{tabular}{r|l}
+      % 著者
+      \textrm{Author} & \textrm{\@theauthor} \\
+      % 所属
+      \ifx\@affiliation\empty
+      \else
+        \textrm{Affiliation} & \textrm{\@affiliation} \\
+      \fi
+      % SNS
+      \ifx\@social\@empty
+      \else
+        \ifx\@account\@empty
+        \else
+          \textrm{\@social} & \textrm{\@account} \\
+        \fi
+      \fi
+      % Email
+      \ifx\@email\empty
+      \else
+        \textrm{Email} & \textrm{\@email} \\
+      \fi
+    \end{tabular}
+%  }
+}
+
+% タイトル印字
+\renewcommand{\title}[2]{\def\@thetitlesize{#1}\def\@thetitle{#2}}
+\title{18pt}{}
+
+\newcommand{\titleskip}[1]{\def\@titleskip{#1}}
+\newcommand{\summaryskip}[1]{\def\@summaryskip{#1}}
+\newcommand{\setchapter}[1]{\def\@chapternum{#1}}
+
+\pretitle{
+  \vspace{-13mm}\hspace{-5mm}
+  \includegraphics[width=40mm]{assets/chapters/\@chapternum.pdf}\\
+  \begin{minipage}{0.9\textwidth}
+    {\fontsize{\@thetitlesize}{\@thetitlesize}\bfseries\textsf{\@thetitle}} \\
+  \end{minipage}
+  \vspace{\@titleskip}
+  \begin{flushright}
+    \authortable
+  \end{flushright}
+}
+\posttitle{
+  \vspace{1mm}
+  \hrule
+  \vspace{1mm}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{r|X}
+    \textsf{\small\bfseries 概要} & {\footnotesize \@summary} \\
+  \end{tabularx}
+  \vspace{\@summaryskip}
+}
+\preauthor{}
+\postauthor{}
+
+
+% セクションのタイトル
+\titleformat{\section}[block]{}{}{0pt}{
+  \colorbox{darkgray}{\begin{picture}(2,9)\end{picture}}
+  \:\Large\bfseries\textsf
+}[
+  \vspace{-4pt}
+  \begin{picture}(100,0)
+    \put(3,16.3){\color{darkgray}\line(1,0){190}}
+  \end{picture}
+  \vspace{-8mm}
+  \vspace{-4pt}
+]
+
+% サブセクションのタイトル
+\titleformat{\subsection}[block]{}{}{0pt}{
+  \fontsize{10pt}{10pt}\selectfont\bfseries\textcolor{lightgray}{■}\;\fontsize{10pt}{10pt}\selectfont\bfseries\textsf
+}[
+  \vspace{-2mm}
+  \vspace{-4pt}
+]
+
+% サブサブセクションのタイトル
+\titleformat{\subsubsection}[block]{}{}{0pt}{
+  \fontsize{9pt}{9pt}\selectfont\bfseries\textsf
+}[
+  \vspace{-2mm}
+  \vspace{-4pt}
+]
+
+\titlespacing\section{0pt}{3pt plus 4pt minus 2pt}{6pt plus 2pt minus 2pt}
+\titlespacing\subsection{0pt}{3pt plus 4pt minus 2pt}{6pt plus 2pt minus 2pt}
+\titlespacing\subsubsection{0pt}{3pt plus 4pt minus 2pt}{6pt plus 2pt minus 2pt}
+
+
+% 著者情報を出力するコマンド
+\newcommand{\authorinfo}[2]{%
+\section*{著者情報}
+\begin{wrapfigure}[6]{l}{17mm}
+ \begin{center}
+   \vspace{-3mm}
+   \frame{\includegraphics[width=20mm]{#1}}
+ \end{center}
+\end{wrapfigure}
+\small \noindent #2
+}
+
+\renewcommand{\figurename}{▲~図}
+\renewcommand{\fnum@figure}{\figurename\thefigure~:\hspace{-1mm}}
+\renewcommand{\tablename}{▼~表}
+\renewcommand{\fnum@table}{\tablename\thetable~:\hspace{-1mm}}
+\renewcommand{\lstlistingname}{▲~リスト}
+\renewcommand{\fnum@lstlisting}{\lstlistingname\thelstlisting~:\hspace{-1mm}}
+
+\setlength{\parskip}{4pt}

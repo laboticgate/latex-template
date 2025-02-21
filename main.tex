@@ -1,0 +1,59 @@
+% 以下は編集作業時に各人のフォーマットがズレるので変更しないこと。
+\documentclass[
+  paper={202mm,277mm},
+  twoside,
+  twocolumn,
+  head_space=24mm,
+  foot_space=28mm,
+  gutter=32mm,
+  line_length=71mm,
+  column_gap=6mm,
+  jafontsize=9pt,
+]{jlreq}
+\usepackage{laboticgate}
+
+% ページ番号を設定。編集時に調整するため変更不要。
+\setcounter{page}{1}
+
+% 記事番号を設定。編集時に調整するため変更不要。
+\setchapter{1}
+
+% レイアウトの都合上、フォントサイズの若干の調整はOK。
+\title{26pt}{らぼちっく；げーと\\ \LaTeX テンプレート v1.4}
+\titleskip{-7mm}
+
+% 各ページ下部のノンブル横に印刷されるタイトル。改行を入れないこと。
+\footertitle{らぼちっく；げーと \LaTeX テンプレート v1.4}
+
+% 記事タイトル下部に印刷される記事の概要。
+\summary{らぼちっく；げーとの同人誌で使う記事テンプレートです。}
+\summaryskip{-10mm}
+
+% 日付は空のままにしておくこと。
+\date{}
+
+% 著者名（ハンドルネーム可）
+\author{ぺんぎんさん}
+
+% 所属（表示しない場合はコメントアウトしておく）
+%\affiliation{らぼちっく；げーと}
+
+% SNSアカウント（表示しない場合はコメントアウトしておく）
+\social{X/Twitter}{@penguin2716}
+
+% メールアドレス（表示しない場合はコメントアウトしておく）
+%\email{laboticgate@example.com}
+
+% 変更しないこと
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+\input{content}
+
+% 著者情報（プロフィール画像は差し替えること）
+\authorinfo{images/profile.png}{
+ぺんぎんさん。2007年くらいにうっかりWindowsを吹き飛ばしてからLinuxで生活してます。最近はちょっとだけFreeBSDで遊んでる。コンピュータで遊ぶのが好き。秋葉原あたりによく出没するらしい。情報技術系同人サークル「らぼちっく；げーと」で本を作っています。購入いただきありがとうございます！
+}
+
+% 変更しないこと
+\end{document}
