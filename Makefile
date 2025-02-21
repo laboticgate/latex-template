@@ -32,7 +32,7 @@ view: $(TARGET).pdf
 	evince $<
 
 clean:
-	rm -f $(TARGET).pdf $(TARGET)_outline.pdf $(TARGET)_preview.pdf
+	rm -f $(TARGET).pdf $(TARGET)_outline.pdf $(TARGET)_nomargin.pdf
 
 distclean: clean
 	rm -f *.aux *.log *.bbl *.blg *.ilg *.ind *.ltjruby
