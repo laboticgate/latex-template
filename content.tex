@@ -249,9 +249,10 @@ $ lspci
 % 文章中に \cite{...} による引用がある場合、次のいずれかで引用元を示すこと。
 % (A) BibTeXを使う場合（推奨）
 % この方法だと文章中で引用されたもののみが表示される。
-\footnotesize
-\bibliographystyle{unsrt}
+\renewcommand{\bibfont}{\footnotesize}
+\bibliographystyle{unsrtnat}
 \bibliography{cites}
+\vspace{-1mm}
 
 % (B) BibTeXを使わない場合
 % この方法だと文章中で引用されていなくても表示される。

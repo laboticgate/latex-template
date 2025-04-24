@@ -19,6 +19,7 @@
 \usepackage{tabularx}
 \usepackage[symbol]{footmisc}
 \renewcommand{\thefootnote}{*\arabic{footnote}}
+\usepackage[square,numbers,comma]{natbib}
 
 %% % フォント設定
 %% % 和文フォント設定
@@ -221,5 +222,8 @@
 \renewcommand{\fnum@table}{\tablename\thetable~:\hspace{-1mm}}
 \renewcommand{\lstlistingname}{▲~リスト}
 \renewcommand{\fnum@lstlisting}{\lstlistingname\thelstlisting~:\hspace{-1mm}}
+
+% 参考文献の引用番号フォーマット
+\renewcommand{\bibnumfmt}[1]{[#1] }
 
 \setlength{\parskip}{4pt}
